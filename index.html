@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Time</title>
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        color: #f1f1f1;
+      }
+
+      body {
+        background: #5a0616;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      h1 {
+        position: relative;
+        font-weight: 600;
+        font-size: 13vmin;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        padding: 35px;
+        background: #5b0606;
+        border-radius: 20px;
+        animation: box 1s linear infinite both;
+      }
+      @keyframes box {
+        0% {
+          box-shadow: 0 0 5px #5c1617;
+        }
+        0% {
+          box-shadow: 0 0 35px #ba5858;
+        }
+        0% {
+          box-shadow: 0 0 65px #5c1617;
+        }
+        0% {
+          box-shadow: 0 0 80px #ba5858;
+        }
+        100% {
+          box-shadow: 0 0 105px #5c1617;
+        }
+      }
+
+      #gmt {
+        font-size: 7vmin;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>
+      <span id="hour">12</span>:<span id="min">00</span>:<span id="sec">00</span
+      ><span id="gmt">AM</span>
+    </h1>
+
+    <script>
+      const h = document.querySelector("#hour");
+
+      const m = document.querySelector("#min");
+
+      const s = document.querySelector("#sec");
+
+      const gt = document.querySelector("#gmt");
+
+      const time = () => {
+        let t = new Date();
+
+        let hour = t.getHours();
+
+        let min = t.getMinutes();
+
+        let sec = t.getSeconds();
+
+        let gmt = "pm";
+
+        if (hour < 12) {
+          gmt = "AM";
+        } else if (hour >= 12) {
+          gmt = "PM";
+          if (hour > 12) {
+            hour -= 12;
+          }
+        }
+
+        hour = hour < 10 ? "0" + hour : hour;
+        min = min < 10 ? "0" + min : min;
+        sec = sec < 10 ? "0" + sec : sec;
+
+        h.textContent = hour;
+
+        m.textContent = min;
+
+        s.textContent = sec;
+
+        gt.textContent = gmt;
+
+        console.log(hour, min, sec);
+      };
+
+      setInterval(time, 1000);
+    </script>
+  </body>
+</html>
